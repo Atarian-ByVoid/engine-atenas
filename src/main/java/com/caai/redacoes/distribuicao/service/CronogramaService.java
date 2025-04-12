@@ -49,6 +49,7 @@ public class CronogramaService {
 
         return gerarPlanilhaExcel(cronogramas);
     }
+    
     private byte[] gerarPlanilhaExcel(List<Cronograma> cronogramas) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Cronograma");

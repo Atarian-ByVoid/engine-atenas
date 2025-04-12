@@ -1,18 +1,20 @@
 package com.caai.redacoes.distribuicao.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-public class Corretor {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Corretor extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nome;
     private String email;
     private String telefone;
-    private String nome;
 }

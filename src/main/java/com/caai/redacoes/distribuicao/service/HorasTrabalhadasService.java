@@ -13,6 +13,7 @@ import com.caai.redacoes.distribuicao.repository.HorasTrabalhadasRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.io.InputStream;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,14 +34,14 @@ public class HorasTrabalhadasService {
             String nomeCorretor = row.getCell(0).getStringCellValue(); 
             Integer horasCorrigidas = (int) row.getCell(1).getNumericCellValue(); 
 
-            Corretor corretor = corretorRepository.findByNome(nomeCorretor);
+            Optional<Corretor> corretor = corretorRepository.findByNome(nomeCorretor);
 
             if (corretor != null) {
                 HorasTrabalhadas horasTrabalhadas = horasTrabalhadasRepository.findByCorretorNome(nomeCorretor);
 
                 if (horasTrabalhadas == null) {
                     horasTrabalhadas = new HorasTrabalhadas();
-                    horasTrabalhadas.setCorretor(corretor);
+                    horasTrabalhadas.setCorretor(corretor.get());
                     horasTrabalhadas.setHorasTrabalhadas(horasCorrigidas);
                 } else {
                     horasTrabalhadas.setHorasTrabalhadas(horasCorrigidas);
